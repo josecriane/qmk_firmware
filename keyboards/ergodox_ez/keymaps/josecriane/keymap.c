@@ -76,8 +76,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |         |      |------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |         |      |      |      |      |      |      |        |
  * `--------+------+------+------+------+-------------'         `-------------+------+------+------+------+--------'
- *   |      |      |      |      |      |                                       |      |      |      |      |      |
- *   `----------------------------------'                                       `----------------------------------'
+ *   |      |      | CTRL |  GUI | SHFT |                                     |      |      |      |      |      |
+ *   `----------------------------------'                                     `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
  *                                 ,------|------|------|       |------+------+------.
@@ -92,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,   KC_NO,   KC_NO,  KC_NO,   KC_NO,   KC_NO,   KC_TRNS,
          KC_NO, _A_TILD, _O_TILD,_E_TILD, _U_TILD, _I_TILD,
        KC_TRNS,   KC_NO,   KC_NO,  KC_NO,   KC_NO,   KC_NO,   KC_TRNS,
-       KC_TRNS,   KC_NO,   KC_NO,  KC_NO,   KC_NO,
+       KC_TRNS,   KC_NO, KC_LCTL,KC_LGUI, KC_LSFT,
                                                               KC_TRNS,   KC_TRNS,
                                                                          KC_TRNS,
                                                    KC_TRNS,   KC_TRNS,   KC_TRNS,
@@ -117,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+-------+------+------+------+------|      |        |      |------+------+------+------+------+--------|
  * |        |       |      | UNDO |      |      |      |        |      |      |CTL+E |      |      |CTL+A |        |
  * `--------+-------+------+------+------+-------------'        `-------------+------+------+------+------+--------'
- *   |      |       |      |      |      |                                    |      |      |      |      |      |
+ *   |      |       | CTRL |  GUI | SHFT |                                    |      |      |      |      |      |
  *   `-----------------------------------'                                    `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
@@ -133,7 +133,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,    KC_LEFT,    KC_DOWN,      KC_UP,   KC_RIGHT,   KC_NO,   KC_TRNS,
        KC_TRNS, LGUI(KC_A), LGUI(KC_C), LGUI(KC_V), LGUI(KC_X),   KC_NO,
        KC_TRNS,      KC_NO,      KC_NO, LGUI(KC_Z),      KC_NO,   KC_NO,   KC_TRNS,
-       KC_TRNS,      KC_NO,    KC_TRNS,      KC_NO,      KC_NO,
+       KC_TRNS,      KC_NO,    KC_LCTL,    KC_LGUI,    KC_LSFT,
                                                               KC_TRNS,   KC_TRNS,
                                                                          KC_TRNS,
                                                    KC_TRNS,   KC_TRNS,   KC_TRNS,
