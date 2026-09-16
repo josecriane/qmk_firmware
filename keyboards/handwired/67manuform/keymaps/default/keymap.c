@@ -286,20 +286,70 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return OLED_ROTATION_270;
 }
 
-bool oled_task_user(void) {
-    oled_write_P(PSTR("L: "), false);
+static void render_layer(void) {
+    uint8_t layer = get_highest_layer(layer_state);
 
-    switch (get_highest_layer(layer_state)) {
-        case DVORAK: oled_write_ln_P(PSTR("Dvorak"), false); break;
-        case MOD: oled_write_ln_P(PSTR("Mods"), true); break;
-        case ARR: oled_write_ln_P(PSTR("Arrows"), false); break;
-        case GAME: oled_write_ln_P(PSTR("Gaming"), false); break;
-        case DOTA: oled_write_ln_P(PSTR("Dota"), false); break;
-        case M_DVORAK: oled_write_ln_P(PSTR("M Dvora"), false); break;
-        case M_MOD: oled_write_ln_P(PSTR("M mods"), false); break;
-        case M_ARR: oled_write_ln_P(PSTR("M arrow"), false); break;
-        default: oled_write_ln_P(PSTR("Unknown"), false); break;
+    oled_set_cursor(0, 1);
+    oled_write_ln_P(PSTR("Layer:"), false);
+    oled_write_P(PSTR("----------"), false);
+
+    switch (layer) {
+        case DVORAK:
+        case M_DVORAK: oled_write_ln_P(PSTR(" DVORAK"), false); break;
+        case MOD:
+        case M_MOD: oled_write_ln_P(PSTR(" MODS"), false); break;
+        case ARR:
+        case M_ARR: oled_write_ln_P(PSTR(" ARROWS"), false); break;
+        case GAME: oled_write_ln_P(PSTR(" GAMING"), false); break;
+        case DOTA: oled_write_ln_P(PSTR(" DOTA"), false); break;
+        default: oled_write_ln_P(PSTR(" ?"), false); break;
     }
+
+    oled_write_ln_P(layer >= M_DVORAK ? PSTR(" MAC") : PSTR(""), false);
+}
+
+static void render_mod(char name, bool active) {
+    oled_write_char(' ', false);
+    oled_write_char(name, active);
+}
+
+static void render_mods(void) {
+    uint8_t mods = get_mods() | get_oneshot_mods();
+
+    oled_set_cursor(0, 6);
+    oled_write_ln_P(PSTR("Mods:"), false);
+    oled_write_P(PSTR("----------"), false);
+    render_mod('C', mods & MOD_MASK_CTRL);
+    render_mod('S', mods & MOD_MASK_SHIFT);
+    render_mod('A', mods & MOD_MASK_ALT);
+    render_mod('G', mods & MOD_MASK_GUI);
+}
+
+static void render_locks(void) {
+    led_t leds = host_keyboard_led_state();
+
+    oled_set_cursor(0, 10);
+    oled_write_P(PSTR("CAPS"), leds.caps_lock);
+    oled_write_P(PSTR("  "), false);
+    oled_write_P(PSTR("NUM"), leds.num_lock);
+}
+
+static void render_wpm(void) {
+    oled_set_cursor(0, 11);
+    oled_write_P(PSTR("WPM: "), false);
+    oled_write(get_u8_str(get_current_wpm(), '0'), false);
+}
+
+bool oled_task_user(void) {
+    if (last_input_activity_elapsed() > OLED_TIMEOUT) {
+        oled_off();
+        return false;
+    }
+
+    render_layer();
+    render_mods();
+    render_locks();
+    render_wpm();
     return false;
 }
 #endif

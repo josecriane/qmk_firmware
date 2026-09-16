@@ -26,7 +26,8 @@
         "wpm": true
     },
     "build": {
-        "debounce_type": "sym_eager_pr"
+        "debounce_type": "sym_eager_pr",
+        "lto": true
     },
     "debounce": 15,
     "tapping": {

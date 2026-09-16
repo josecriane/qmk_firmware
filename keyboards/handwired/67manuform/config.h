@@ -10,7 +10,7 @@
 #define MOUSEKEY_WHEEL_DELAY  0
 
 #define OLED_DISPLAY_128X64
-#define OLED_TIMEOUT 300000
+#define OLED_TIMEOUT 120000
 
 #define IS_COMMAND() ( \
     get_mods() == (MOD_BIT(KC_LCTL) | MOD_BIT(KC_RCTL)) || \
