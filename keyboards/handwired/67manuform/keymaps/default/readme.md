@@ -1,0 +1,1 @@
+# 67Manuform Default Configuration
