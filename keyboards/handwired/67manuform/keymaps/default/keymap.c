@@ -226,24 +226,13 @@ KC_LPRN, KC_SCLN,    KC_Q,    KC_J,     KC_K,     KC_X, KC_LCTL,                
 
 
 static void windows_tildes(uint16_t keycode) {
-    bool is_shift_pressed = get_mods() & MOD_BIT(KC_LSFT);
-
-    if (is_shift_pressed) { unregister_code(KC_LSFT); }
-
     switch (keycode) {
-        case _A_TILD ... _I_TILD: SEND_STRING(SS_TAP(X_QUOTE)); break;
-        case _ENHE: SEND_STRING("~"); break;
-    }
-
-    if (is_shift_pressed) { register_code(KC_LSFT); }
-
-    switch (keycode) {
-        case _A_TILD: SEND_STRING(SS_TAP(X_A)); break;
-        case _O_TILD: SEND_STRING(SS_TAP(X_O)); break;
-        case _E_TILD: SEND_STRING(SS_TAP(X_E)); break;
-        case _U_TILD: SEND_STRING(SS_TAP(X_U)); break;
-        case _I_TILD: SEND_STRING(SS_TAP(X_I)); break;
-        case _ENHE: SEND_STRING(SS_TAP(X_N)); break;
+        case _A_TILD: SEND_STRING(SS_ALGR("a")); break;
+        case _O_TILD: SEND_STRING(SS_ALGR("o")); break;
+        case _E_TILD: SEND_STRING(SS_ALGR("e")); break;
+        case _U_TILD: SEND_STRING(SS_ALGR("u")); break;
+        case _I_TILD: SEND_STRING(SS_ALGR("i")); break;
+        case _ENHE: SEND_STRING(SS_ALGR("n")); break;
     }
 }
 
